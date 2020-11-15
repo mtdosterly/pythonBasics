@@ -1,6 +1,6 @@
 def find_primes(num):
     primes = []
-    for val in range(3,num):
+    for val in range(3,num,2):
         for div in range(2,val-1):
             if val % div == 0:
                 break
