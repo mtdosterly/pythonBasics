@@ -36,9 +36,9 @@ def intro_actions():
         print(f"\nIt's {options[0]}. Congrats, {player2}! You're X!")
     print("You'll choose your square by pressing the corresponding key on the number pad.")
     print("To help you visualize it, here's the board layout, with each square containing its corresponding number:\n")
-    print(f"     |     |     \n  7  |  8  |  9  \n_____|_____|_____\n")
-    print(f"     |     |     \n  4  |  5  |  6  \n_____|_____|_____\n")
-    print(f"     |     |     \n  1  |  2  |  3  \n     |     |     \n")
+    print("     |     |     \n  7  |  8  |  9  \n_____|_____|_____\n")
+    print("     |     |     \n  4  |  5  |  6  \n_____|_____|_____\n")
+    print("     |     |     \n  1  |  2  |  3  \n     |     |     \n")
     input("Ready? Hit enter to begin")
     return player1, player2, xo, whoseturn # return player names, letter assignments, and who goes first
 
