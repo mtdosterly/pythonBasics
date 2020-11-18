@@ -1,4 +1,4 @@
-#from IPython.display import clear_output
+#from IPython.display import clear_output #use if in jupyter notebook
 
 player1 = player2 = whoseturn = winner = ''
 board = {x:" " for x in range(1,10)}
@@ -11,7 +11,7 @@ def intro_actions():
 
     player1 = input("Player one, please enter your name: ")   # get player names
     player2 = input("Player two, please enter your name: ")
-#    clear_output() #use if in jupyter notebook
+#   clear_output() #use if in jupyter notebook
     print('\n'*100)  #use otherwise
 
     coinchoice = False
@@ -84,13 +84,13 @@ def game_over():
     if vertical or horizontal or diagUp or diagDown:
         gameover = True
         winner = whoseturn
-#        clear_output() #use if in jupyter notebook
+#       clear_output() #use if in jupyter notebook
         print('\n'*100)  #use otherwise
         display_board()
         print(f"{winner} wins!\n\nCongrats {winner}!\n")
     elif all(board[x] != " " for x in range(1,10)):
         gameover = True
-#        clear_output() #use if in jupyter notebook
+#       clear_output() #use if in jupyter notebook
         print('\n'*100)  #use otherwise
         display_board()
         print("It's a draw.\n")
@@ -108,7 +108,7 @@ for player in xo:
         whoseturn = player
 
 while gameover == False:
-#    clear_output() #use if in jupyter notebook
+#   clear_output() #use if in jupyter notebook
     print('\n'*100)  #use otherwise
 
     display_board()
