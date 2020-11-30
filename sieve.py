@@ -1,7 +1,7 @@
 def prime_sieve(limit):
     primes = [num for num in range(2,limit + 1)] #list of numbers to work on
     for test in primes[0:]:  #testing each number still in the list
-        for x in range(2,int(limit/test + 1)): #iterating through a multiplier
+        for x in range(2,int((limit+1)/test)): #iterating through a multiplier
             if (test * x) in primes: # if multiple of confirmed prime in list
                 primes.remove(test * x)  #delete it
     return primes
