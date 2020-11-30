@@ -27,7 +27,6 @@ class Bank():
         def __init__(self,player,stack):
                 self.player = player
                 self.stack = stack
-                self.amount = amount
         def __str__(self):
                 return f"{player.name}, you have {self.stack} to bet."
         def deposit(self,amount):
@@ -44,45 +43,12 @@ class Bank():
                                 hasbet = True
                                 return self.amount
 
-def checktotal(hand):
-        if hand < 21:
-                return None
-        if hand == 21:
-                print("Twenty one!\n")
-                return "winner"
-        if hand > 21:
-                return "loser"
-
-def acecall():
-        acecall = False
-        while acecall == False:
-                call = input("Would you like aces to be high or low? Enter high/low ")
-                if call == "high" or call == "low":
-                        acecall = True
-                        if call == "high":
-                                value["A"] = 11
-                                break
-                        else:
-                                value["A"] = 1
-                                break
-                else:
-                        continue
-
-def checkwin(playerHandValue):
-    if checktotal(playerHandValue) == "winner":
-        return "a"
-    elif checktotal(playerHandValue) == "loser":
-        return "b"
-    else:
-        return "c"
-
-import random
-# import IPython
+import random,IPython
 
 playerHandValue = 0
 dealerHandValue = 0
 isover = False
-acehigh = True
+acecount = 0
 playergame = True
 dealergame = True
 
@@ -95,8 +61,8 @@ value = {'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':10,'Q':10,'
 
 player = Player(input("Welcome to blackjack! Please enter your name: "))
 playerbank = Bank(player,500)
-print('\n'*100,playerbank)
-# IPython.display.clear_output()
+# print('\n'*100,playerbank)
+IPython.display.clear_output()
 print("\nLet's play!")
 
 # create the deck
@@ -121,7 +87,7 @@ while isover == False:
         print([f"{playerhand[x]}"])
     print(f"Dealer is showing\n{dealerhand[0]}.")
     if playerhand[0].rank == "A" or playerhand[1].rank == "A":
-        acecall()
+        acecount += 1
 
 # player loop
 
@@ -150,19 +116,28 @@ while isover == False:
                     for x in range(len(playerhand)):
                         print([f"{playerhand[x]}"])
                     if playerhand[counter] == "A":
-                        acecheck()
+                        acecount += 1
                     playerHandValue += playerhand[-1].value
-                    if checkwin(playerHandValue) == "a":
-                        print("You've won\n")
-                        playerbank.deposit(2 * playerbank.amount)
-                        playergame = dealergame = False
-                        break
-                    elif checkwin(playerHandValue) == "b":
-                        print("Bust! You lose!")
-                        playergame = dealergame = False
-                        break
-                    else:
-                        pass
+                    checked = False
+                    while checked == False:
+                        if playerHandValue < 21:
+                            checked = True
+                        elif playerHandValue == 21:
+                            checked = True
+                            print("Twenty one!\n")
+                            print("You've won\n")
+                            playerbank.deposit(2 * playerbank.amount)
+                            playergame = dealergame = False
+                            break
+                        elif playerHandValue > 21:
+                            if acecount:
+                                playerHandValue -= 10
+                                acecount -= 1
+                            else:
+                                checked = True
+                                print("Bust! You lose!")
+                                playergame = dealergame = False
+                                break
                     print(playerHandValue)
                 else:
                     print("You have rested. Dealer's turn.")
